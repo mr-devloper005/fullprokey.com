@@ -1,10 +1,10 @@
 export const siteIdentity = {
   code: process.env.NEXT_PUBLIC_SITE_CODE || 'fp9q2x7m4v',
   name: process.env.NEXT_PUBLIC_SITE_NAME || 'Full Pro Key',
-  tagline: process.env.NEXT_PUBLIC_SITE_TAGLINE || 'Classified discovery platform',
+  tagline: process.env.NEXT_PUBLIC_SITE_TAGLINE || 'Direct classifieds and buyer-ready posts',
   description:
     process.env.NEXT_PUBLIC_SITE_DESCRIPTION ||
-    'A streamlined classified platform for quick browsing, offers, and local opportunity discovery.',
+    'A no-frills classified platform for practical offers, deals, and quick discovery.',
   domain: process.env.NEXT_PUBLIC_SITE_DOMAIN || 'fullprokey.com',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://fullprokey.com',
   ogImage: process.env.NEXT_PUBLIC_SITE_OG_IMAGE || '/og-default.png',

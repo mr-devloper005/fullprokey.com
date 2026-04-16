@@ -2,17 +2,15 @@ import type { SiteRecipe } from '@/design/factory/recipe-types'
 
 export const SITE_RECIPE: SiteRecipe = {
   productFamily: 'directory',
-  themePack: 'yelp-local',
-  homepageTemplate: 'listing-home',
-  navbarTemplate: 'compact-bar',
-  footerTemplate: 'columns-footer',
-  motionPack: 'minimal',
-  primaryTask: 'listing',
-  enabledTasks: ['listing', 'classified', 'profile'],
+  themePack: 'directory-premium',
+  homepageTemplate: 'classified-home',
+  navbarTemplate: 'utility-bar',
+  footerTemplate: 'dense-footer',
+  motionPack: 'utility-snappy',
+  primaryTask: 'classified',
+  enabledTasks: ['classified'],
   taskTemplates: {
-    listing: 'listing-directory',
-    classified: 'classified-market',
-    profile: 'profile-business',
+    classified: 'classified-market'
   },
   manualOverrides: {
     navbar: false,
