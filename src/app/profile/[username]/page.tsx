@@ -107,14 +107,14 @@ export default async function ProfileDetailPage({ params }: { params: Promise<{ 
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_12%_10%,rgba(196,181,253,0.2),transparent_35%),linear-gradient(180deg,#f5f3ff_0%,#ffffff_62%,#eef2ff_100%)]">
       <NavbarShell />
       <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
         <SchemaJsonLd data={breadcrumbData} />
-        <section className="rounded-3xl border border-border/60 bg-white/90 p-8 shadow-sm md:p-12">
+        <section className="rounded-3xl border border-violet-200/70 bg-white/90 p-8 shadow-[0_20px_48px_rgba(109,40,217,0.12)] md:p-12">
           <div className="grid gap-8 md:grid-cols-[200px_1fr] md:items-start">
             <div className="flex justify-center md:justify-start">
-              <div className="relative h-36 w-36 overflow-hidden rounded-full border border-border/70 bg-muted">
+              <div className="relative h-36 w-36 overflow-hidden rounded-full border border-violet-200/70 bg-violet-50/70">
                 {logoUrl ? (
                   <ContentImage src={logoUrl} alt={post.title} fill className="object-cover" sizes="144px" intrinsicWidth={144} intrinsicHeight={144} />
                 ) : (
@@ -164,7 +164,7 @@ export default async function ProfileDetailPage({ params }: { params: Promise<{ 
                 />
               ))}
             </div>
-            <nav className="mt-6 rounded-2xl border border-border bg-card/60 p-4">
+            <nav className="mt-6 rounded-2xl border border-violet-200/70 bg-white/80 p-4 backdrop-blur">
               <p className="text-sm font-semibold text-foreground">Related links</p>
               <ul className="mt-2 space-y-2 text-sm">
                 {suggestedArticles.slice(0, 3).map((article) => (

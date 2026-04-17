@@ -13,48 +13,48 @@ const FALLBACK_IMAGE = "/placeholder.svg?height=1400&width=2400";
 
 const heroClasses = {
   'search-first': {
-    section: 'border-b border-slate-200 bg-[linear-gradient(180deg,#edf5ff_0%,#f8fbff_42%,#ffffff_100%)] text-slate-950',
-    overlay: 'bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.18),transparent_26%),radial-gradient(circle_at_top_right,rgba(15,23,42,0.12),transparent_26%)]',
+    section: 'border-b border-violet-200/70 bg-[radial-gradient(circle_at_10%_10%,rgba(196,181,253,0.35),transparent_30%),linear-gradient(180deg,#f5f3ff_0%,#ffffff_58%,#eef2ff_100%)] text-violet-950',
+    overlay: 'bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.2),transparent_26%),radial-gradient(circle_at_top_right,rgba(129,140,248,0.16),transparent_26%)]',
     grid: 'lg:grid-cols-[1.08fr_0.92fr]',
     card: 'border border-white/70 bg-white/80 shadow-[0_28px_90px_rgba(15,23,42,0.12)]',
-    title: 'text-slate-950',
-    body: 'text-slate-600',
-    badge: 'bg-slate-950 text-white',
-    primary: 'bg-slate-950 text-white hover:bg-slate-800',
-    secondary: 'border border-slate-200 bg-white text-slate-900 hover:bg-slate-100',
+    title: 'text-violet-950',
+    body: 'text-violet-900/70',
+    badge: 'bg-violet-700 text-white',
+    primary: 'bg-violet-700 text-white hover:bg-violet-800',
+    secondary: 'border border-violet-200/70 bg-white text-violet-900 hover:bg-violet-50',
   },
   'spotlight-split': {
-    section: 'border-b border-[rgba(123,72,35,0.14)] bg-[linear-gradient(180deg,#1f1613_0%,#2d1d17_50%,#fff7ed_100%)] text-white',
-    overlay: 'bg-[linear-gradient(90deg,rgba(20,12,9,0.88)_0%,rgba(32,19,14,0.66)_45%,rgba(255,247,237,0)_100%)]',
+    section: 'border-b border-violet-200/70 bg-[radial-gradient(circle_at_10%_10%,rgba(196,181,253,0.35),transparent_30%),linear-gradient(180deg,#f5f3ff_0%,#ffffff_58%,#eef2ff_100%)] text-violet-950',
+    overlay: 'bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.2),transparent_26%),radial-gradient(circle_at_top_right,rgba(129,140,248,0.16),transparent_26%)]',
     grid: 'lg:grid-cols-[1.14fr_0.86fr]',
-    card: 'border border-white/10 bg-white/8 shadow-[0_28px_100px_rgba(18,9,4,0.4)] backdrop-blur-md',
-    title: 'text-white',
-    body: 'text-amber-100/78',
-    badge: 'bg-[#ffdd9c] text-[#2a160c]',
-    primary: 'bg-[#ffdd9c] text-[#2a160c] hover:bg-[#ffd17d]',
-    secondary: 'border border-white/18 bg-white/10 text-white hover:bg-white/16',
+    card: 'border border-violet-200/70 bg-white/78 shadow-[0_28px_100px_rgba(109,40,217,0.16)] backdrop-blur-md',
+    title: 'text-violet-950',
+    body: 'text-violet-900/70',
+    badge: 'bg-violet-700 text-white',
+    primary: 'bg-violet-700 text-white hover:bg-violet-800',
+    secondary: 'border border-violet-200/70 bg-white text-violet-900 hover:bg-violet-50',
   },
   'gallery-mosaic': {
-    section: 'border-b border-slate-800 bg-[linear-gradient(180deg,#07111f_0%,#0c172b_45%,#101c31_100%)] text-white',
-    overlay: 'bg-[radial-gradient(circle_at_top_left,rgba(110,231,183,0.16),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(99,102,241,0.16),transparent_26%)]',
+    section: 'border-b border-violet-200/70 bg-[radial-gradient(circle_at_10%_10%,rgba(196,181,253,0.35),transparent_30%),linear-gradient(180deg,#f5f3ff_0%,#ffffff_58%,#eef2ff_100%)] text-violet-950',
+    overlay: 'bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.2),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(99,102,241,0.16),transparent_26%)]',
     grid: 'lg:grid-cols-[0.95fr_1.05fr]',
-    card: 'border border-white/10 bg-slate-900/65 shadow-[0_30px_110px_rgba(15,23,42,0.45)] backdrop-blur-xl',
-    title: 'text-white',
-    body: 'text-slate-300',
-    badge: 'bg-[#8df0c8] text-[#07111f]',
-    primary: 'bg-[#8df0c8] text-[#07111f] hover:bg-[#77dfb8]',
-    secondary: 'border border-white/18 bg-white/6 text-white hover:bg-white/12',
+    card: 'border border-violet-200/70 bg-white/78 shadow-[0_30px_110px_rgba(109,40,217,0.16)] backdrop-blur-xl',
+    title: 'text-violet-950',
+    body: 'text-violet-900/70',
+    badge: 'bg-violet-700 text-white',
+    primary: 'bg-violet-700 text-white hover:bg-violet-800',
+    secondary: 'border border-violet-200/70 bg-white text-violet-900 hover:bg-violet-50',
   },
   'catalog-promo': {
-    section: 'border-b border-[rgba(66,74,42,0.14)] bg-[linear-gradient(180deg,#f6f6ee_0%,#f4f7df_35%,#ffffff_100%)] text-[#18210f]',
-    overlay: 'bg-[radial-gradient(circle_at_top_right,rgba(163,230,53,0.16),transparent_22%),radial-gradient(circle_at_top_left,rgba(34,197,94,0.14),transparent_24%)]',
+    section: 'border-b border-violet-200/70 bg-[radial-gradient(circle_at_10%_10%,rgba(196,181,253,0.35),transparent_30%),linear-gradient(180deg,#f5f3ff_0%,#ffffff_58%,#eef2ff_100%)] text-violet-950',
+    overlay: 'bg-[radial-gradient(circle_at_top_right,rgba(168,85,247,0.2),transparent_22%),radial-gradient(circle_at_top_left,rgba(129,140,248,0.16),transparent_24%)]',
     grid: 'lg:grid-cols-[1.12fr_0.88fr]',
-    card: 'border border-[#dce5c2] bg-white/90 shadow-[0_28px_80px_rgba(64,76,34,0.12)]',
-    title: 'text-[#18210f]',
-    body: 'text-[#5c684b]',
-    badge: 'bg-[#18210f] text-[#ebf5d9]',
-    primary: 'bg-[#18210f] text-[#ebf5d9] hover:bg-[#25331a]',
-    secondary: 'border border-[#dce5c2] bg-white text-[#18210f] hover:bg-[#f4f7df]',
+    card: 'border border-violet-200/70 bg-white/90 shadow-[0_28px_80px_rgba(109,40,217,0.14)]',
+    title: 'text-violet-950',
+    body: 'text-violet-900/70',
+    badge: 'bg-violet-700 text-white',
+    primary: 'bg-violet-700 text-white hover:bg-violet-800',
+    secondary: 'border border-violet-200/70 bg-white text-violet-900 hover:bg-violet-50',
   },
 } as const;
 
@@ -117,6 +117,20 @@ export function HeroSection({ images, tasks }: { images: string[]; tasks: TaskCo
                 <Link href={siteContent.hero.secondaryCta.href}>{siteContent.hero.secondaryCta.label}</Link>
               </Button>
             </div>
+
+            <form action="/search" className={`mt-5 flex max-w-2xl items-center gap-3 rounded-full px-4 py-2.5 ${palette.card}`}>
+              <input type="hidden" name="master" value="1" />
+              <Search className="h-4 w-4 shrink-0" />
+              <input
+                type="search"
+                name="q"
+                placeholder="Search listings, classifieds, and photos"
+                className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:opacity-80"
+              />
+              <button type="submit" className={`rounded-full px-4 py-2 text-xs font-semibold ${palette.primary}`}>
+                Search
+              </button>
+            </form>
 
             <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-[1.1fr_0.9fr]">
               <div className={`flex items-center gap-3 rounded-[1.6rem] p-4 ${palette.card}`}>

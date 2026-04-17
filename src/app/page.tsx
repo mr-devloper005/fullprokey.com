@@ -11,8 +11,9 @@ import { buildPageMetadata } from '@/lib/seo'
 import { fetchTaskPosts } from '@/lib/task-data'
 import { siteContent } from '@/config/site.content'
 import { getFactoryState } from '@/design/factory/get-factory-state'
-import { getProductKind, type ProductKind } from '@/design/factory/get-product-kind'
+import { getProductKind } from '@/design/factory/get-product-kind'
 import type { SitePost } from '@/lib/site-connector'
+import { isFocusTask } from '@/lib/focus-tasks'
 import { HOME_PAGE_OVERRIDE_ENABLED, HomePageOverride } from '@/overrides/home-page'
 
 export const revalidate = 300
@@ -75,27 +76,27 @@ function getPostMeta(post?: SitePost | null) {
 function getDirectoryTone(brandPack: string) {
   if (brandPack === 'market-utility') {
     return {
-      shell: 'bg-[#f5f7f1] text-[#1f2617]',
-      hero: 'bg-[linear-gradient(180deg,#eef4e4_0%,#f8faf4_100%)]',
-      panel: 'border border-[#d5ddc8] bg-white shadow-[0_24px_64px_rgba(64,76,34,0.08)]',
-      soft: 'border border-[#d5ddc8] bg-[#eff3e7]',
-      muted: 'text-[#5b664c]',
-      title: 'text-[#1f2617]',
-      badge: 'bg-[#1f2617] text-[#edf5dc]',
-      action: 'bg-[#1f2617] text-[#edf5dc] hover:bg-[#2f3a24]',
-      actionAlt: 'border border-[#d5ddc8] bg-white text-[#1f2617] hover:bg-[#eef3e7]',
+      shell: 'bg-[#f5f3ff] text-violet-950',
+      hero: 'bg-[radial-gradient(circle_at_10%_10%,rgba(196,181,253,0.35),transparent_32%),linear-gradient(180deg,#f5f3ff_0%,#faf5ff_44%,#eef2ff_100%)]',
+      panel: 'border border-violet-200/70 bg-white/90 shadow-[0_24px_64px_rgba(109,40,217,0.14)] backdrop-blur',
+      soft: 'border border-violet-200/70 bg-violet-50/70',
+      muted: 'text-violet-900/65',
+      title: 'text-violet-950',
+      badge: 'bg-violet-700 text-white',
+      action: 'bg-violet-700 text-white hover:bg-violet-800',
+      actionAlt: 'border border-violet-200/70 bg-white text-violet-950 hover:bg-violet-50',
     }
   }
   return {
-    shell: 'bg-[#f8fbff] text-slate-950',
-    hero: 'bg-[linear-gradient(180deg,#eef6ff_0%,#ffffff_100%)]',
-    panel: 'border border-slate-200 bg-white shadow-[0_24px_64px_rgba(15,23,42,0.08)]',
-    soft: 'border border-slate-200 bg-slate-50',
-    muted: 'text-slate-600',
-    title: 'text-slate-950',
-    badge: 'bg-slate-950 text-white',
-    action: 'bg-slate-950 text-white hover:bg-slate-800',
-    actionAlt: 'border border-slate-200 bg-white text-slate-950 hover:bg-slate-100',
+    shell: 'bg-[#f5f3ff] text-violet-950',
+    hero: 'bg-[radial-gradient(circle_at_10%_8%,rgba(196,181,253,0.35),transparent_34%),radial-gradient(circle_at_88%_14%,rgba(244,114,182,0.18),transparent_28%),linear-gradient(180deg,#f5f3ff_0%,#ffffff_58%,#eef2ff_100%)]',
+    panel: 'border border-violet-200/70 bg-white/90 shadow-[0_24px_64px_rgba(109,40,217,0.14)] backdrop-blur',
+    soft: 'border border-violet-200/70 bg-violet-50/70',
+    muted: 'text-violet-900/65',
+    title: 'text-violet-950',
+    badge: 'bg-violet-700 text-white',
+    action: 'bg-violet-700 text-white hover:bg-violet-800',
+    actionAlt: 'border border-violet-200/70 bg-white text-violet-950 hover:bg-violet-50',
   }
 }
 
@@ -149,7 +150,7 @@ function DirectoryHome({ primaryTask, enabledTasks, listingPosts, classifiedPost
   const tone = getDirectoryTone(brandPack)
   const featuredListings = (listingPosts.length ? listingPosts : classifiedPosts).slice(0, 3)
   const featuredTaskKey: TaskKey = listingPosts.length ? 'listing' : 'classified'
-  const quickRoutes = enabledTasks.slice(0, 4)
+  const quickRoutes = enabledTasks.filter((task) => isFocusTask(task.key)).slice(0, 3)
 
   return (
     <main>
@@ -159,27 +160,38 @@ function DirectoryHome({ primaryTask, enabledTasks, listingPosts, classifiedPost
             <div>
               <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] ${tone.badge}`}>
                 <Compass className="h-3.5 w-3.5" />
-                Local discovery product
+                Classifieds + image discovery
               </span>
               <h1 className={`mt-6 max-w-4xl text-5xl font-semibold tracking-[-0.06em] sm:text-6xl ${tone.title}`}>
-                Search businesses, compare options, and act fast without digging through generic feeds.
+                Post faster, discover better: local classifieds and visual listings in one streamlined feed.
               </h1>
               <p className={`mt-6 max-w-2xl text-base leading-8 ${tone.muted}`}>{SITE_CONFIG.description}</p>
 
-              <div className={`mt-8 grid gap-3 rounded-[2rem] p-4 ${tone.panel} md:grid-cols-[1.25fr_0.8fr_auto]`}>
-                <div className="rounded-full bg-black/5 px-4 py-3 text-sm">What do you need today?</div>
-                <div className="rounded-full bg-black/5 px-4 py-3 text-sm">Choose area or city</div>
-                <Link href={primaryTask?.route || '/listings'} className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${tone.action}`}>
-                  Browse now
+              <form action="/search" className={`mt-8 grid gap-3 rounded-[2rem] p-4 ${tone.panel} md:grid-cols-[1.25fr_0.8fr_auto]`}>
+                <input type="hidden" name="master" value="1" />
+                <input
+                  type="search"
+                  name="q"
+                  placeholder="What are you looking for?"
+                  className="h-12 rounded-full bg-black/5 px-4 py-3 text-sm outline-none placeholder:opacity-75"
+                />
+                <input
+                  type="text"
+                  name="category"
+                  placeholder="Location or neighborhood"
+                  className="h-12 rounded-full bg-black/5 px-4 py-3 text-sm outline-none placeholder:opacity-75"
+                />
+                <button type="submit" className={`inline-flex h-12 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${tone.action}`}>
+                  Search now
                   <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
+                </button>
+              </form>
 
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
                 {[
-                  ['Verified businesses', `${featuredListings.length || 3}+ highlighted surfaces`],
-                  ['Fast scan rhythm', 'More utility, less filler'],
-                  ['Action first', 'Call, visit, shortlist, compare'],
+                  ['Visual trust cues', `${featuredListings.length || 3}+ active posts`],
+                  ['Quick scan rhythm', 'Browse titles, images, and context fast'],
+                  ['Action-first flow', 'Message, shortlist, and post in seconds'],
                 ].map(([label, value]) => (
                   <div key={label} className={`rounded-[1.4rem] p-4 ${tone.soft}`}>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.22em] opacity-70">{label}</p>
@@ -194,11 +206,11 @@ function DirectoryHome({ primaryTask, enabledTasks, listingPosts, classifiedPost
                 <div className="flex items-center justify-between gap-4">
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.22em] opacity-70">Primary lane</p>
-                    <h2 className="mt-2 text-3xl font-semibold">{primaryTask?.label || 'Listings'}</h2>
+                    <h2 className="mt-2 text-3xl font-semibold">{primaryTask?.label || 'Classifieds'}</h2>
                   </div>
                   <ShieldCheck className="h-6 w-6" />
                 </div>
-                <p className={`mt-4 text-sm leading-7 ${tone.muted}`}>{primaryTask?.description || 'Structured discovery for services, offers, and business surfaces.'}</p>
+                <p className={`mt-4 text-sm leading-7 ${tone.muted}`}>{primaryTask?.description || 'A discovery-first board for listings, deals, and image-led posts.'}</p>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
@@ -221,8 +233,8 @@ function DirectoryHome({ primaryTask, enabledTasks, listingPosts, classifiedPost
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between gap-4 border-b border-border pb-6">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">Featured businesses</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">Strong listings with clearer trust cues.</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">Featured posts</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">Fresh classifieds and image-led listings to browse now.</h2>
           </div>
           <Link href="/listings" className="text-sm font-semibold text-primary hover:opacity-80">Open listings</Link>
         </div>
@@ -237,11 +249,11 @@ function DirectoryHome({ primaryTask, enabledTasks, listingPosts, classifiedPost
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8">
           <div className={`rounded-[2rem] p-7 ${tone.panel}`}>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">What makes this different</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">Built like a business directory, not a recolored content site.</h2>
+            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">Built for visual classifieds, not a generic multi-module shell.</h2>
             <ul className={`mt-6 space-y-3 text-sm leading-7 ${tone.muted}`}>
-              <li>Search-first hero instead of a magazine headline.</li>
-              <li>Action-oriented listing cards with trust metadata.</li>
-              <li>Support lanes for offers, businesses, and profiles.</li>
+              <li>Search-first hero with local intent and image-first cues.</li>
+              <li>Compact cards that prioritize quick scanning and action.</li>
+              <li>Focused navigation around listings, classifieds, and images.</li>
             </ul>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
@@ -477,9 +489,9 @@ export default async function HomePage() {
     return <HomePageOverride />
   }
 
-  const enabledTasks = SITE_CONFIG.tasks.filter((task) => task.enabled)
+  const enabledTasks = SITE_CONFIG.tasks.filter((task) => task.enabled && isFocusTask(task.key))
   const { recipe } = getFactoryState()
-  const productKind = getProductKind(recipe)
+  getProductKind(recipe)
   const taskFeed: TaskFeedItem[] = (
     await Promise.all(
       enabledTasks.map(async (task) => ({
@@ -524,25 +536,14 @@ export default async function HomePage() {
     <div className="min-h-screen bg-background text-foreground">
       <NavbarShell />
       <SchemaJsonLd data={schemaData} />
-      {productKind === 'directory' ? (
-        <DirectoryHome
-          primaryTask={primaryTask}
-          enabledTasks={enabledTasks}
-          listingPosts={listingPosts}
-          classifiedPosts={classifiedPosts}
-          profilePosts={profilePosts}
-          brandPack={recipe.brandPack}
-        />
-      ) : null}
-      {productKind === 'editorial' ? (
-        <EditorialHome primaryTask={primaryTask} articlePosts={articlePosts} supportTasks={supportTasks} />
-      ) : null}
-      {productKind === 'visual' ? (
-        <VisualHome primaryTask={primaryTask} imagePosts={imagePosts} profilePosts={profilePosts} articlePosts={articlePosts} />
-      ) : null}
-      {productKind === 'curation' ? (
-        <CurationHome primaryTask={primaryTask} bookmarkPosts={bookmarkPosts} profilePosts={profilePosts} articlePosts={articlePosts} />
-      ) : null}
+      <DirectoryHome
+        primaryTask={primaryTask}
+        enabledTasks={enabledTasks}
+        listingPosts={listingPosts}
+        classifiedPosts={classifiedPosts}
+        profilePosts={profilePosts}
+        brandPack={recipe.brandPack}
+      />
       <Footer />
     </div>
   )

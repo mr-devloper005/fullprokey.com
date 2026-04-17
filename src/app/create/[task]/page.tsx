@@ -271,7 +271,7 @@ export default function CreateTaskPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_12%_10%,rgba(196,181,253,0.2),transparent_35%),linear-gradient(180deg,#f5f3ff_0%,#ffffff_62%,#eef2ff_100%)]">
       <NavbarShell />
       <main className="mx-auto max-w-4xl px-4 py-12">
         <div className="mb-8 flex items-center gap-3">
@@ -286,7 +286,7 @@ export default function CreateTaskPage() {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-border bg-card p-8 shadow-sm">
+        <div className="rounded-3xl border border-violet-200/70 bg-white/90 p-8 shadow-[0_20px_48px_rgba(109,40,217,0.12)] backdrop-blur">
           <div className="flex flex-wrap gap-2">
             <Badge variant="secondary">{taskConfig.label}</Badge>
             <Badge variant="outline">Local-only</Badge>
@@ -304,13 +304,13 @@ export default function CreateTaskPage() {
                     placeholder={field.placeholder}
                     value={values[field.key] || ""}
                     onChange={(event) => updateValue(field.key, event.target.value)}
-                    className="border-2 border-slate-200 bg-white focus-visible:ring-2 focus-visible:ring-primary/30"
+                    className="border border-violet-200/70 bg-white/90 focus-visible:ring-2 focus-visible:ring-primary/30"
                   />
                 ) : field.type === "category" ? (
                   <select
                     value={values[field.key] || ""}
                     onChange={(event) => updateValue(field.key, event.target.value)}
-                    className="h-11 rounded-lg border-2 border-slate-200 bg-white px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30"
+                    className="h-11 rounded-lg border border-violet-200/70 bg-white/90 px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30"
                   >
                     <option value="">Select category</option>
                     {CATEGORY_OPTIONS.map((option) => (
@@ -368,7 +368,7 @@ export default function CreateTaskPage() {
                     }
                     value={values[field.key] || ""}
                     onChange={(event) => updateValue(field.key, event.target.value)}
-                    className="h-11 border-2 border-slate-200 bg-white focus-visible:ring-2 focus-visible:ring-primary/30"
+                    className="h-11 border border-violet-200/70 bg-white/90 focus-visible:ring-2 focus-visible:ring-primary/30"
                   />
                 )}
               </div>
