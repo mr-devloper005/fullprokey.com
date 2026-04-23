@@ -7,12 +7,12 @@ export function CTASection() {
   return (
     <section className="pb-24 pt-12 sm:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-[2rem] border border-[rgba(110,26,55,0.14)] bg-[linear-gradient(135deg,rgba(110,26,55,0.98),rgba(63,18,31,0.98)_55%,rgba(114,186,169,0.9)_160%)] p-8 text-white shadow-[0_30px_90px_rgba(66,24,34,0.22)] sm:p-12 lg:p-16">
+        <div className="relative overflow-hidden rounded-[2rem] border border-violet-200/70 bg-[radial-gradient(circle_at_10%_10%,rgba(196,181,253,0.36),transparent_30%),linear-gradient(135deg,rgba(109,40,217,0.96),rgba(76,29,149,0.96)_58%,rgba(99,102,241,0.9)_160%)] p-8 text-white shadow-[0_30px_90px_rgba(109,40,217,0.26)] sm:p-12 lg:p-16">
           <div className="absolute inset-0 opacity-[0.16]" style={{ backgroundImage: 'linear-gradient(120deg, rgba(255,255,255,0.16) 0, transparent 26%, transparent 74%, rgba(255,255,255,0.1) 100%)' }} />
 
           <div className="relative mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/16 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-white/88">
-              <Sparkles className="h-4 w-4 text-[#D5E7B5]" />
+              <Sparkles className="h-4 w-4 text-violet-100" />
               {siteContent.cta.badge}
             </div>
 
@@ -25,7 +25,7 @@ export function CTASection() {
             </p>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button size="lg" asChild className="h-12 rounded-full bg-[#D5E7B5] px-7 text-sm font-semibold text-[#24161b] hover:bg-[#c5db9b]">
+              <Button size="lg" asChild className="h-12 rounded-full bg-violet-100 px-7 text-sm font-semibold text-violet-900 hover:bg-violet-200">
                 <Link href={siteContent.cta.primaryCta.href}>
                   {siteContent.cta.primaryCta.label}
                   <ArrowRight className="ml-2 h-4 w-4" />

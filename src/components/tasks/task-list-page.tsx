@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Building2, FileText, Image as ImageIcon, LayoutGrid, Tag, User } from 'lucide-react'
+import { ArrowRight, Building2, FileText, Image as ImageIcon, LayoutGrid, Plus, Tag, User } from 'lucide-react'
 import { NavbarShell } from '@/components/shared/navbar-shell'
 import { Footer } from '@/components/shared/footer'
 import { TaskListClient } from '@/components/tasks/task-list-client'
@@ -57,33 +57,16 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
   }))
   const { recipe } = getFactoryState()
   const layoutKey = recipe.taskLayouts[task as keyof typeof recipe.taskLayouts] || `${task}-${task === 'listing' ? 'directory' : 'editorial'}`
-  const shellClass = variantShells[layoutKey as keyof typeof variantShells] || 'bg-background'
+  const shellClass = 'bg-[radial-gradient(circle_at_12%_10%,rgba(196,181,253,0.22),transparent_35%),linear-gradient(180deg,#f5f3ff_0%,#ffffff_62%,#eef2ff_100%)]'
   const Icon = taskIcons[task] || LayoutGrid
 
-  const isDark = ['image-masonry', 'image-portfolio', 'profile-creator'].includes(layoutKey)
-  const ui = isDark
-    ? {
-        muted: 'text-slate-300',
-        panel: 'border border-white/10 bg-white/6',
-        soft: 'border border-white/10 bg-white/5',
-        input: 'border-white/10 bg-white/6 text-white',
-        button: 'bg-white text-slate-950 hover:bg-slate-200',
-      }
-    : layoutKey.startsWith('article') || layoutKey.startsWith('sbm')
-      ? {
-          muted: 'text-[#72594a]',
-          panel: 'border border-[#dbc6b6] bg-white/90',
-          soft: 'border border-[#dbc6b6] bg-[#fff8ef]',
-          input: 'border border-[#dbc6b6] bg-white text-[#2f1d16]',
-          button: 'bg-[#2f1d16] text-[#fff4e4] hover:bg-[#452920]',
-        }
-      : {
-          muted: 'text-slate-600',
-          panel: 'border border-slate-200 bg-white',
-          soft: 'border border-slate-200 bg-slate-50',
-          input: 'border border-slate-200 bg-white text-slate-950',
-          button: 'bg-slate-950 text-white hover:bg-slate-800',
-        }
+  const ui = {
+    muted: 'text-violet-900/65',
+    panel: 'border border-violet-200/70 bg-white/90 shadow-[0_18px_44px_rgba(109,40,217,0.08)] backdrop-blur',
+    soft: 'border border-violet-200/70 bg-violet-50/70',
+    input: 'border border-violet-200/70 bg-white text-violet-950',
+    button: 'bg-violet-700 text-white hover:bg-violet-800',
+  }
 
   return (
     <div className={`min-h-screen ${shellClass}`}>
@@ -125,10 +108,10 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
             <div className={`rounded-[2rem] p-7 shadow-[0_24px_70px_rgba(15,23,42,0.07)] ${ui.panel}`}>
               <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] opacity-70"><Icon className="h-4 w-4" /> {taskConfig?.label || task}</div>
               <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-foreground">{taskConfig?.description || 'Latest posts'}</h1>
-              <p className={`mt-4 max-w-2xl text-sm leading-7 ${ui.muted}`}>Built with a cleaner scan rhythm, stronger metadata grouping, and a structure designed for business discovery rather than editorial reading.</p>
+              <p className={`mt-4 max-w-2xl text-sm leading-7 ${ui.muted}`}>Built for local discovery with a classifieds-first scan rhythm, clearer image cues, and faster action paths.</p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link href={taskConfig?.route || '#'} className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${ui.button}`}>Explore results <ArrowRight className="h-4 w-4" /></Link>
-                <Link href="/search" className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${ui.soft}`}>Open search</Link>
+                <Link href="/search" className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${ui.soft}`}>Smart search</Link>
               </div>
             </div>
             <form className={`grid gap-3 rounded-[2rem] p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] ${ui.soft}`} action={taskConfig?.route || '#'}>
@@ -203,10 +186,16 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
           <section className="mb-12 grid gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div className={`rounded-[1.8rem] p-6 ${ui.panel}`}>
               <p className={`text-xs uppercase tracking-[0.3em] ${ui.muted}`}>{taskConfig?.label || task}</p>
-              <h1 className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-foreground">Fast-moving notices, offers, and responses in a compact board format.</h1>
+              <h1 className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-foreground">Fast-moving classifieds and visual offers in a compact, mobile-first board format.</h1>
+              <div className="mt-5">
+                <Link href="/create/classified" className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${ui.button}`}>
+                  <Plus className="h-4 w-4" />
+                  Create Classified
+                </Link>
+              </div>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              {['Quick to scan', 'Shorter response path', 'Clearer urgency cues'].map((item) => (
+              {['Quick to scan', 'Image-backed trust', 'Clearer urgency cues'].map((item) => (
                 <div key={item} className={`rounded-[1.5rem] p-5 ${ui.soft}`}>
                   <p className="text-sm font-semibold">{item}</p>
                 </div>
@@ -243,11 +232,13 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
             {intro.paragraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 40)} className={`mt-4 text-sm leading-7 ${ui.muted}`}>{paragraph}</p>
             ))}
-            <div className="mt-4 flex flex-wrap gap-4 text-sm">
-              {intro.links.map((link) => (
-                <a key={link.href} href={link.href} className="font-semibold text-foreground hover:underline">{link.label}</a>
-              ))}
-            </div>
+            {task !== 'classified' ? (
+              <div className="mt-4 flex flex-wrap gap-4 text-sm">
+                {intro.links.map((link) => (
+                  <a key={link.href} href={link.href} className="font-semibold text-foreground hover:underline">{link.label}</a>
+                ))}
+              </div>
+            ) : null}
           </section>
         ) : null}
 

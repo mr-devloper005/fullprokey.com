@@ -11,6 +11,7 @@ import { SITE_CONFIG, type TaskKey } from '@/lib/site-config'
 import { cn } from '@/lib/utils'
 import { siteContent } from '@/config/site.content'
 import { getFactoryState } from '@/design/factory/get-factory-state'
+import { isFocusTask } from '@/lib/focus-tasks'
 import { NAVBAR_OVERRIDE_ENABLED, NavbarOverride } from '@/overrides/navbar'
 
 const NavbarAuthControls = dynamic(() => import('@/components/shared/navbar-auth-controls').then((mod) => mod.NavbarAuthControls), {
@@ -68,13 +69,13 @@ const variantClasses = {
 
 const directoryPalette = {
   'directory-clean': {
-    shell: 'border-b border-slate-200 bg-white/94 text-slate-950 shadow-[0_1px_0_rgba(15,23,42,0.04)] backdrop-blur-xl',
-    logo: 'rounded-2xl border border-slate-200 bg-slate-50',
-    nav: 'text-slate-600 hover:text-slate-950',
-    search: 'border border-slate-200 bg-slate-50 text-slate-600',
-    cta: 'bg-slate-950 text-white hover:bg-slate-800',
-    post: 'border border-slate-200 bg-white text-slate-950 hover:bg-slate-50',
-    mobile: 'border-t border-slate-200 bg-white',
+    shell: 'border-b border-violet-200/70 bg-white/85 text-violet-950 shadow-[0_1px_0_rgba(109,40,217,0.08)] backdrop-blur-xl',
+    logo: 'rounded-2xl border border-violet-200/70 bg-violet-50/70',
+    nav: 'text-violet-900/70 hover:text-violet-950',
+    search: 'border border-violet-200/70 bg-violet-50/70 text-violet-900/70',
+    cta: 'bg-violet-700 text-white hover:bg-violet-800',
+    post: 'border border-violet-200/70 bg-white text-violet-950 hover:bg-violet-50/60',
+    mobile: 'border-t border-violet-200/70 bg-white/95',
   },
   'market-utility': {
     shell: 'border-b border-[#d7deca] bg-[#f4f6ef]/96 text-[#1f2617] shadow-[0_1px_0_rgba(64,76,34,0.06)] backdrop-blur-xl',
@@ -97,7 +98,10 @@ export function Navbar() {
   const { isAuthenticated } = useAuth()
   const { recipe } = getFactoryState()
 
-  const navigation = useMemo(() => SITE_CONFIG.tasks.filter((task) => task.enabled && task.key !== 'profile'), [])
+  const navigation = useMemo(
+    () => SITE_CONFIG.tasks.filter((task) => task.enabled && task.key !== 'profile' && isFocusTask(task.key)),
+    []
+  )
   const primaryNavigation = navigation.slice(0, 5)
   const mobileNavigation = navigation.map((task) => ({
     name: task.label,
@@ -137,24 +141,26 @@ export function Navbar() {
           </div>
 
           <div className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
-            <div className={cn('flex w-full max-w-xl items-center gap-3 rounded-full px-4 py-3', palette.search)}>
-              <Search className="h-4 w-4" />
-              <span className="text-sm">Find businesses, spaces, and local services</span>
-              <div className="ml-auto hidden items-center gap-1 text-xs opacity-75 md:flex">
+            <form action="/search" className={cn('flex w-full max-w-xl items-center gap-3 rounded-full px-4 py-2.5', palette.search)}>
+              <input type="hidden" name="master" value="1" />
+              <Search className="h-4 w-4 shrink-0" />
+              <input
+                name="q"
+                type="search"
+                placeholder="Search listings, classifieds, and photos"
+                className="h-8 min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:opacity-80"
+              />
+              <button type="submit" className={cn('rounded-full px-3 py-1.5 text-xs font-semibold', palette.cta)}>
+                Search
+              </button>
+              <div className="ml-1 hidden items-center gap-1 text-xs opacity-75 md:flex">
                 <MapPin className="h-3.5 w-3.5" />
-                Local discovery
+                Nearby picks
               </div>
-            </div>
+            </form>
           </div>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-            {primaryTask ? (
-              <Link href={primaryTask.route} className="hidden items-center gap-2 rounded-full border border-current/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] opacity-75 md:inline-flex">
-                <Sparkles className="h-3.5 w-3.5" />
-                {primaryTask.label}
-              </Link>
-            ) : null}
-
             {isAuthenticated ? (
               <NavbarAuthControls />
             ) : (
@@ -165,7 +171,7 @@ export function Navbar() {
                 <Button size="sm" asChild className={cn('rounded-full', palette.cta)}>
                   <Link href="/register">
                     <Plus className="mr-1 h-4 w-4" />
-                    Add Listing
+                    Post Ad
                   </Link>
                 </Button>
               </div>
@@ -180,10 +186,19 @@ export function Navbar() {
         {isMobileMenuOpen && (
           <div className={palette.mobile}>
             <div className="space-y-2 px-4 py-4">
-              <div className={cn('mb-3 flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium', palette.search)}>
-                <Search className="h-4 w-4" />
-                Find businesses, spaces, and services
-              </div>
+              <form action="/search" className={cn('mb-3 flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium', palette.search)}>
+                <input type="hidden" name="master" value="1" />
+                <Search className="h-4 w-4 shrink-0" />
+                <input
+                  name="q"
+                  type="search"
+                  placeholder="Search listings, classifieds, and photos"
+                  className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:opacity-80"
+                />
+                <button type="submit" className={cn('rounded-full px-3 py-1 text-xs font-semibold', palette.cta)}>
+                  Go
+                </button>
+              </form>
               {mobileNavigation.map((item) => {
                 const isActive = pathname.startsWith(item.href)
                 return (

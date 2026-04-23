@@ -20,27 +20,27 @@ const taskIcons: Record<string, typeof Building2> = {
 const sectionStyles = {
   directory: {
     section: 'py-14 sm:py-16',
-    heading: 'text-slate-950',
-    body: 'text-slate-600',
-    card: 'border-b border-slate-200 pb-6',
+    heading: 'text-violet-950',
+    body: 'text-violet-900/70',
+    card: 'border-b border-violet-200/70 pb-6',
   },
   editorial: {
-    section: 'py-16 sm:py-18',
-    heading: 'text-[#2c1d18]',
-    body: 'text-[#735f52]',
-    card: 'border-b border-[rgba(120,76,44,0.16)] pb-6',
+    section: 'py-14 sm:py-16',
+    heading: 'text-violet-950',
+    body: 'text-violet-900/70',
+    card: 'border-b border-violet-200/70 pb-6',
   },
   studio: {
-    section: 'py-16 sm:py-18',
-    heading: 'text-slate-950',
-    body: 'text-slate-600',
-    card: 'border-b border-slate-200 pb-6',
+    section: 'py-14 sm:py-16',
+    heading: 'text-violet-950',
+    body: 'text-violet-900/70',
+    card: 'border-b border-violet-200/70 pb-6',
   },
   market: {
     section: 'py-14 sm:py-16',
-    heading: 'text-[#202816]',
-    body: 'text-[#5d664f]',
-    card: 'border-b border-[rgba(67,78,41,0.14)] pb-6',
+    heading: 'text-violet-950',
+    body: 'text-violet-900/70',
+    card: 'border-b border-violet-200/70 pb-6',
   },
 } as const;
 
@@ -59,7 +59,7 @@ export function TaskFeedSection({
   const Icon = taskIcons[task.key] || LayoutGrid;
 
   return (
-    <section className={`${style.section} ${featured ? 'bg-[rgba(255,255,255,0.35)]' : ''}`}>
+    <section className={`${style.section} ${featured ? 'bg-violet-50/40' : ''}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className={`mb-8 grid gap-5 md:grid-cols-[1fr_auto] md:items-end ${style.card}`}>
           <div>
