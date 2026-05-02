@@ -229,7 +229,7 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
 
   if (productKind === "directory" && (task === "listing" || task === "classified" || task === "profile")) {
     return (
-      <div className="min-h-screen bg-[#f8fbff]">
+      <div className="min-h-screen bg-[radial-gradient(circle_at_12%_10%,rgba(196,181,253,0.22),transparent_35%),linear-gradient(180deg,#f5f3ff_0%,#ffffff_62%,#eef2ff_100%)]">
         <NavbarShell />
         <DirectoryTaskDetailPage
           task={task}
@@ -248,7 +248,7 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_12%_10%,rgba(196,181,253,0.2),transparent_35%),linear-gradient(180deg,#f5f3ff_0%,#ffffff_62%,#eef2ff_100%)]">
       <NavbarShell />
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <SchemaJsonLd data={schemaPayload} />
@@ -336,7 +336,7 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
             ) : null}
 
             {isClassified ? (
-              <div className="mx-auto w-full max-w-4xl rounded-2xl border border-border bg-card p-6">
+              <div className="mx-auto w-full max-w-4xl rounded-2xl border border-violet-200/70 bg-white/90 p-6 shadow-[0_14px_34px_rgba(109,40,217,0.08)]">
                 <h2 className="text-lg font-semibold text-foreground">Business details</h2>
                 <div className="mt-4 space-y-3 text-sm text-muted-foreground">
                   {content.website && (
@@ -380,7 +380,7 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
             ) : null}
 
             {content.highlights?.length && !isArticle ? (
-              <div className={cn("mt-8 rounded-2xl border border-border bg-card p-6", isClassified ? "mx-auto w-full max-w-4xl" : "")}>
+              <div className={cn("mt-8 rounded-2xl border border-violet-200/70 bg-white/90 p-6 shadow-[0_14px_34px_rgba(109,40,217,0.08)]", isClassified ? "mx-auto w-full max-w-4xl" : "")}>
                 <h2 className="text-lg font-semibold text-foreground">Highlights</h2>
                 <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                   {content.highlights.map((item) => (
@@ -391,7 +391,7 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
             ) : null}
 
             {isClassified && mapEmbedUrl ? (
-              <div className="mx-auto w-full max-w-4xl rounded-2xl border border-border bg-card p-4">
+              <div className="mx-auto w-full max-w-4xl rounded-2xl border border-violet-200/70 bg-white/90 p-4 shadow-[0_14px_34px_rgba(109,40,217,0.08)]">
                 <p className="text-sm font-semibold text-foreground">Location map</p>
                 <div className="mt-4 overflow-hidden rounded-xl border border-border">
                   <iframe
@@ -408,7 +408,7 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
 
           {!hideSidebar ? (
             <aside className="space-y-6">
-            <div className="rounded-2xl border border-border bg-card p-6">
+            <div className="rounded-2xl border border-violet-200/70 bg-white/90 p-6 shadow-[0_14px_34px_rgba(109,40,217,0.08)]">
               <h2 className="text-lg font-semibold text-foreground">Listing details</h2>
                 <div className="mt-4 space-y-3 text-sm text-muted-foreground">
                   {content.website && (
@@ -458,7 +458,7 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
             </div>
 
             {mapEmbedUrl ? (
-              <div className="rounded-2xl border border-border bg-card p-4">
+              <div className="rounded-2xl border border-violet-200/70 bg-white/90 p-4 shadow-[0_14px_34px_rgba(109,40,217,0.08)]">
                 <p className="text-sm font-semibold text-foreground">Location map</p>
                 <div className="mt-4 overflow-hidden rounded-xl border border-border">
                   <iframe
@@ -502,7 +502,7 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
             </div>
             </>
           ) : null}
-          <nav className="mt-6 rounded-2xl border border-border bg-card/60 p-4">
+          <nav className="mt-6 rounded-2xl border border-violet-200/70 bg-white/80 p-4 shadow-[0_14px_34px_rgba(109,40,217,0.08)] backdrop-blur">
             <p className="text-sm font-semibold text-foreground">Related links</p>
             <ul className="mt-2 space-y-2 text-sm">
               {related.map((item) => (
