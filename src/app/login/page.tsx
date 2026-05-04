@@ -42,7 +42,7 @@ export default function LoginPage() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     await login(email, password)
-    router.push('/dashboard')
+    router.push('/')
   }
 
   return (
