@@ -43,7 +43,7 @@ export default function RegisterPage() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     await signup(name, email, password)
-    router.push('/dashboard')
+    router.push('/')
   }
 
   return (
