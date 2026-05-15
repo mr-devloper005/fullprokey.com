@@ -35,8 +35,8 @@ const footerLinks = {
   resources: [
     { name: 'Help Center', href: '/help' },
     { name: 'Community', href: '/community' },
-    { name: 'Developers', href: '/developers' },
-    { name: 'Status', href: '/status' },
+    { name: 'Contact', href: '/contact' },
+
   ],
   legal: [
     { name: 'Privacy', href: '/privacy' },
@@ -46,11 +46,7 @@ const footerLinks = {
   ],
 }
 
-const socialLinks = [
-  { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
-  { name: 'GitHub', href: 'https://github.com', icon: Github },
-  { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
-]
+
 
 export function Footer() {
   if (FOOTER_OVERRIDE_ENABLED) {
@@ -122,13 +118,9 @@ export function Footer() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-violet-900/60">Connect</h3>
+                <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-violet-900/60"></h3>
                 <div className="mt-4 flex gap-3">
-                  {socialLinks.map((item) => (
-                    <Link key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className="rounded-full border border-violet-200/70 bg-white p-2.5 text-violet-900/75 hover:bg-violet-50 hover:text-violet-950">
-                      <item.icon className="h-4 w-4" />
-                    </Link>
-                  ))}
+                  
                 </div>
               </div>
             </div>

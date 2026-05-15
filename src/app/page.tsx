@@ -160,12 +160,12 @@ function DirectoryHome({ primaryTask, enabledTasks, listingPosts, classifiedPost
             <div>
               <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] ${tone.badge}`}>
                 <Compass className="h-3.5 w-3.5" />
-                Classifieds + image discovery
+                Local discovery platform
               </span>
-              <h1 className={`mt-6 max-w-4xl text-5xl font-semibold tracking-[-0.06em] sm:text-6xl ${tone.title}`}>
-                Post faster, discover better: local classifieds and visual listings in one streamlined feed.
-              </h1>
-              <p className={`mt-6 max-w-2xl text-base leading-8 ${tone.muted}`}>{SITE_CONFIG.description}</p>
+              <h2 className={`mt-5 max-w-3xl text-2xl font-semibold leading-tight sm:text-3xl ${tone.title}`}>
+                A thoughtful home for stories, visuals, and discovery.
+              </h2>
+              <p className={`mt-4 max-w-2xl text-base leading-8 ${tone.muted}`}>A no-frills platform for practical offers, deals, and quick discovery.</p>
 
               <form action="/search" className={`mt-8 grid gap-3 rounded-[2rem] p-4 ${tone.panel} md:grid-cols-[1.25fr_0.8fr_auto]`}>
                 <input type="hidden" name="master" value="1" />

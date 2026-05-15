@@ -13,7 +13,13 @@ type ListingContent = {
   category?: string
   description?: string
   email?: string
+  image?: string
+  images?: string[]
+  logo?: string
 }
+
+const isValidImageUrl = (value?: string | null) =>
+  typeof value === 'string' && (value.startsWith('/') || /^https?:\/\//i.test(value))
 
 const stripHtml = (value?: string | null) =>
   (value || '')
@@ -38,18 +44,18 @@ const getContent = (post: SitePost): ListingContent => {
 const getImageUrl = (post: SitePost, content: ListingContent) => {
   const media = Array.isArray(post.media) ? post.media : []
   const mediaUrl = media[0]?.url
-  if (mediaUrl) return mediaUrl
+  if (isValidImageUrl(mediaUrl)) return mediaUrl
 
   const contentAny = content as Record<string, unknown>
   const contentImage = typeof contentAny.image === 'string' ? contentAny.image : null
-  if (contentImage) return contentImage
+  if (isValidImageUrl(contentImage)) return contentImage
 
   const contentImages = Array.isArray(contentAny.images) ? contentAny.images : []
-  const firstImage = contentImages.find((value) => typeof value === 'string')
+  const firstImage = contentImages.find((value) => isValidImageUrl(typeof value === 'string' ? value : null))
   if (firstImage) return firstImage as string
 
   const contentLogo = typeof contentAny.logo === 'string' ? contentAny.logo : null
-  if (contentLogo) return contentLogo
+  if (isValidImageUrl(contentLogo)) return contentLogo
 
   return '/placeholder.svg?height=640&width=960'
 }

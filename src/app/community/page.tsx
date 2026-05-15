@@ -85,7 +85,6 @@ export default function CommunityPage() {
 
         <section className="flex flex-wrap gap-3">
           <Button asChild className="rounded-full">
-            <Link href="/images">See Image Feed</Link>
           </Button>
           <Button asChild variant="outline" className="rounded-full">
             <Link href="/help">Community Guidelines</Link>

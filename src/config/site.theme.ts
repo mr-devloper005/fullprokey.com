@@ -4,7 +4,7 @@ export const SITE_THEME = defineSiteTheme({
   shell: 'directory',
   hero: {
     variant: 'search-first',
-    eyebrow: 'Business discovery system',
+    eyebrow: 'Local discovery platform',
   },
   home: {
     layout: 'directory-stack',

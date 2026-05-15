@@ -8,10 +8,10 @@ export const siteContent = {
     tagline: 'Stories, resources, and discoverable posts',
   },
   hero: {
-    badge: 'Latest stories and visuals',
+    badge: 'Local discovery platform',
     title: ['A thoughtful home for', 'stories, visuals, and discovery.'],
     description:
-      'Explore fresh articles, image-led posts, and discoverable content across the platform through a calmer and clearer browsing experience.',
+      'A no-frills platform for practical offers, deals, and quick discovery.',
     primaryCta: {
       label: 'Read latest stories',
       href: '/articles',
