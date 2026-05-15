@@ -1,8 +1,20 @@
 "use client";
 
-import { useMemo, useState, type CSSProperties, type ImgHTMLAttributes } from "react";
+import { useEffect, useMemo, useState, type CSSProperties, type ImgHTMLAttributes } from "react";
 
 const PLACEHOLDER = "/placeholder.svg?height=900&width=1400";
+
+const isRenderableImageSrc = (value?: string) => {
+  if (typeof value !== "string") return false;
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+  return (
+    trimmed.startsWith("/") ||
+    /^https?:\/\//i.test(trimmed) ||
+    /^data:image\//i.test(trimmed) ||
+    /^blob:/i.test(trimmed)
+  );
+};
 
 type ContentImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "alt"> & {
   src?: string;
@@ -28,8 +40,12 @@ export function ContentImage({
   intrinsicHeight,
   ...props
 }: ContentImageProps) {
-  const initialSrc = typeof src === "string" && src.trim() ? src : PLACEHOLDER;
+  const initialSrc = isRenderableImageSrc(src) ? String(src).trim() : PLACEHOLDER;
   const [currentSrc, setCurrentSrc] = useState(initialSrc);
+
+  useEffect(() => {
+    setCurrentSrc(initialSrc);
+  }, [initialSrc]);
 
   const width = intrinsicWidth ?? (fill ? 1600 : 800);
   const height = intrinsicHeight ?? (fill ? 900 : 600);

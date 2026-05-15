@@ -194,12 +194,27 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
                 </Link>
               </div>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-3">
+              <form className={`rounded-[1.5rem] p-5 ${ui.panel}`} action={taskConfig?.route || '#'}>
+                <p className={`text-xs uppercase tracking-[0.24em] ${ui.muted}`}>Category filter</p>
+                <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+                  <select name="category" defaultValue={normalizedCategory} className={`h-11 flex-1 rounded-xl px-3 text-sm ${ui.input}`}>
+                    <option value="all">All categories</option>
+                    {CATEGORY_OPTIONS.map((item) => (
+                      <option key={item.slug} value={item.slug}>{item.name}</option>
+                    ))}
+                  </select>
+                  <button type="submit" className={`h-11 rounded-xl px-4 text-sm font-medium ${ui.button}`}>Apply</button>
+                </div>
+              </form>
+
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
               {['Quick to scan', 'Image-backed trust', 'Clearer urgency cues'].map((item) => (
                 <div key={item} className={`rounded-[1.5rem] p-5 ${ui.soft}`}>
                   <p className="text-sm font-semibold">{item}</p>
                 </div>
               ))}
+              </div>
             </div>
           </section>
         ) : null}
